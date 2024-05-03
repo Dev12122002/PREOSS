@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './Home.css';
-
-// useEffect(() => {
-//     navigate('/');
-// }, [navigate]);
 
 export default function Home() {
 
+    // eslint-disable-next-line
     const [token, setToken] = useState(localStorage.getItem('token'));
 
     return (

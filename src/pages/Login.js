@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+// import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import './Login.css';
 import { toast } from 'react-hot-toast';
@@ -116,8 +116,9 @@ export default function Login({ isLoggedIn, setLoggedIn }) {
     };
 
     return (
-        <div className='container text-center p-5 login-form' style={{ border: "none", width: "21%", borderRadius: "110%", marginTop: "7%", minWidth: "300px" }}>
-            <h3>Welcome to PREOSS</h3>
+        <div className='container text-center p-5 login-form' style={{ border: "none", width: "29%", borderRadius: "110%", marginTop: "7%", minWidth: "390px" }}>
+            <img src='/images/logo-element.svg' className='logo mt-0' alt='logo'></img>
+            <h3 className='mt-1'>Welcome to PREOSS</h3>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 {!otpSent &&
                     <>
@@ -134,9 +135,9 @@ export default function Login({ isLoggedIn, setLoggedIn }) {
                             </Form.Group>
                         </Row>
 
-                        <div class="circle-container" onClick={() => loginButtonRef.current.click()}>
-                            <div class="circle"></div>
-                            <img class="icon" src="/images/rarrow.svg" alt="submit" />
+                        <div className="circle-container" onClick={() => loginButtonRef.current.click()}>
+                            <div className="circle"></div>
+                            <img className="icon" src="/images/rarrow.svg" alt="submit" />
                         </div>
                         <input type='submit' ref={loginButtonRef} className='d-none'></input>
                     </>
@@ -156,9 +157,9 @@ export default function Login({ isLoggedIn, setLoggedIn }) {
                             </Form.Group>
                         </Row>
 
-                        <div class="circle-container" onClick={() => resendButtonRef.current.click()}>
-                            <div class="circle"></div>
-                            <img class="icon" src="/images/resendArrow.svg" alt="submit" />
+                        <div className="circle-container" onClick={() => resendButtonRef.current.click()}>
+                            <div className="circle"></div>
+                            <img className="icon" src="/images/resendArrow.svg" alt="submit" />
                         </div>
                         <input type='submit' ref={resendButtonRef} className='d-none'></input>
                     </>
