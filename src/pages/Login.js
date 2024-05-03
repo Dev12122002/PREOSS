@@ -9,7 +9,7 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login() {
+export default function Login({ isLoggedIn, setLoggedIn }) {
     const [validated, setValidated] = useState(false);
     const [employeeId, setEmployeeId] = useState('');
     const [otpSent, setOtpSent] = useState(false);
@@ -89,16 +89,18 @@ export default function Login() {
         const url = "https://cpidev.preoss.in/employee/v1/login/verify/otp";
         try {
             const response = await axios.post(url, { ...verifyOTPRequestBody, OTP: otp })
-            console.log({ ...verifyOTPRequestBody, OTP: otp });
+            // console.log({ ...verifyOTPRequestBody, OTP: otp });
+            console.log(response.data);
             if (response.data.success === false) {
                 throw new Error(response.data.message);
             }
+            localStorage.setItem('token', response.data.data);
+            setLoggedIn(true);
+            navigate('/');
         }
         catch (error) {
             throw new Error(error.message);
         }
-        navigate('/');
-
     };
 
     const handleOPTChange = (event) => {

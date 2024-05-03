@@ -1,26 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
 import { Toaster } from 'react-hot-toast';
-import React from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState } from 'react'
+// import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from "./pages/Home";
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Header from './components/Header';
 
 function App() {
-  return (
-    <BrowserRouter>
 
+  const [isLoggedIn, setLoggedIn] = useState(localStorage.getItem('token'));
+
+  return (
+
+    <Router>
       <Toaster position='top-center' />
-      <Header />
+      <Header isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route exact path="/login" element={isLoggedIn ? <Navigate to="/" /> : <Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />} />
+        <Route path="/" element={isLoggedIn ? <Home /> : <Navigate to="/login" />} />
         <Route path="*" element={<NotFound />} />
-        {/* <Route path="/logout" element={<Logout />} /> */}
       </Routes>
-    </BrowserRouter>
+    </Router>
+
   );
 }
 
